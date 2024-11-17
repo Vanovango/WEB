@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Книга 2:Практика</title>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+  <meta content="VS BookEditor" name="GENERATOR"/>
+  <meta content="" name="keywords"/>
+  <meta content="" name="description"/>
+  <meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
+  <meta content="no-cache" http-equiv="Pragma"/>
+  <meta content="0" http-equiv="Expires"/>
+
+  <!-- Table of contents CSS BEGIN -->
+  <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../js/jstree/style.min.css" rel="stylesheet"/>
+  <link href="../js/djvu/djvu_viewer.css" rel="stylesheet"/>
+  <link href="../css/service.css" rel="stylesheet"/>
+  <link href="../css/hint.css" rel="stylesheet"/>
+  <link href="../js/photo-sphere-viewer/photo-sphere-viewer.css" rel="stylesheet"/>
+  <style>
+    .tree {
+       max-width: 280px;
+       width: 100%;
+       overflow-x: hidden;
+    }
+    .jstree-anchor {
+      white-space : normal !important;
+      height : auto !important;
+      padding-right : 24px;
+    }
+    body{
+      padding-bottom: 70px;
+    }
+  </style>
+
+  <style>
+    h1 {font-size: 20pt; padding-left: 10px; border-left: 6px solid CornflowerBlue;}
+h2 {font-size: 18pt; padding-left: 6px; border-left: 4px solid CornflowerBlue;}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 { font-weight: 700;}
+body, p, .paragraph {font-family: "Times New Roman", sanserif; font-size: 14pt; margin-left:10px; margin-right: 10px; background-color: white; text-indent:25px; margin-top:0px; margin-bottom:0px; line-height:25px}
+  </style>
+  
+  <style>
+    
+  </style>
+  <!-- Table of contents CSS END -->
+  
+</head>
+<body onload="onWindowLoad()" onunload="onWindowUnload()">
+  <div class="container-fluid">
+  
+    <!-- Заголовок курса BEGIN -->
+    <div class="row mb-sm-3">
+      <div class="col-sm-12">
+        <h1>Книга 2</h1>
+      </div>
+    </div>
+    <!-- Заголовок курса END -->
+
+    <!-- Поиск, меню BEGIN -->
+    <div class="row mb-sm-3 navbar sticky-top bg-light" style="z-index: 1030;">
+
+      <!-- Скрытие/показ оглавления BEGIN -->
+      <div class="col-sm-auto order-sm-1">
+        <a href="javascript:void(0)" id="showTOC" onclick="setShowTabOfCont()" title="Скрыть/показать оглавление">◄</a>
+      </div>
+      <!-- Скрытие/показ оглавления END -->
+
+      <!-- Уровень сложности BEGIN -->
+      <div class="col-sm-auto order-sm-2">
+        <div class="dropdown">
+          <button aria-expanded="false" aria-haspopup="true" class="btn dropdown-toggle" data-toggle="dropdown" id="difficulty_menu_id" title="Нажмите, чтобы изменить уровень сложности" type="button">
+            Сложность
+          </button>
+          <div aria-labelledby="difficulty_menu_id" class="dropdown-menu">
+            <button class="dropdown-item" onclick="onDifficultyChange(3)" type="button">Достаточная</button>
+            <button class="dropdown-item" onclick="onDifficultyChange(4)" type="button">Повышенная</button>
+            <button class="dropdown-item" onclick="onDifficultyChange(5)" type="button">Высокая</button>
+          </div>
+        </div>
+      </div>
+      <!-- Уровень сложности END -->
+
+      <!-- Поиск BEGIN -->
+      <div class="col-sm-auto order-sm-2 search">
+        <input class="form-control" id="search_box" placeholder="Поиск" type="text"/>
+        <img src="../img/search.png"/>
+      </div>
+      <!-- Поиск END -->
+
+      <!-- Ночной режим BEGIN -->
+      <div class="col-sm-auto order-sm-3">
+        <div class="form-check" id="night_mode">
+          <input class="form-check-input" id="night_mode_id" onclick="setNightMode()" title="Включите, чтобы читать в темноте" type="checkbox"/>
+          <label class="form-check-label" for="night_mode_id" title="Включите, чтобы читать в темноте">Ночной режим</label>
+        </div>
+      </div>
+      <!-- Ночной режим END -->
+
+      <!-- Меню заметка BEGIN -->
+      <div class="col-sm-auto order-sm-4">
+        <div class="dropdown">
+          <button aria-expanded="false" aria-haspopup="true" class="btn dropdown-toggle" data-toggle="dropdown" id="note_menu_id" title="Нажмите, чтобы добавить текстовый комментарий" type="button">
+            Заметка
+          </button>
+          <div aria-labelledby="note_menu_id" class="dropdown-menu">
+            <button class="dropdown-item" href="javascript:void(0)" onclick="createNote()" type="button">Добавить</button>
+            <button class="dropdown-item" href="javascript:void(0)" onclick="listNotes()" type="button">Просмотреть все</button>
+            <hr/>
+            <button class="dropdown-item" href="javascript:void(0)" onclick="exportNotes()" type="button">Экпортировать</button>
+            <button class="dropdown-item" href="javascript:void(0)" onclick="importNotes()" type="button">Импортировать</button>
+          </div>
+        </div>
+      </div>
+      <!-- Меню заметка END -->
+
+      <!-- Меню закладка BEGIN -->
+      <div class="col-sm-auto order-sm-5">
+        <div class="dropdown">
+          <button aria-expanded="false" aria-haspopup="true" class="btn dropdown-toggle" data-toggle="dropdown" id="bookmark_menu_id" title="Нажмите, чтобы добавить закладку" type="button">
+            Закладка
+          </button>
+          <div aria-labelledby="bookmark_menu_id" class="dropdown-menu">
+            <button class="dropdown-item" onclick="createBookmark()" type="button">Добавить</button>
+            <button class="dropdown-item" onclick="deleteBookmark()" type="button">Удалить</button>
+            <button class="dropdown-item" onclick="listBookmarks()" type="button">Просмотреть все</button>
+          </div>
+        </div>
+      </div>
+      <!-- Меню закладка END -->
+
+      <!-- Озвучить BEGIN -->
+      <div class="col-sm-auto order-sm-6">
+        <button class="btn" id="speakBtn" onclick="speakSelectionText()" title="Озвучить выделенный текст" type="button">Озвучить</button>
+      </div>
+      <!-- Озвучить END -->
+
+      <!-- Кнопки вызова справки и записи на консультацию BEGIN -->
+      <div class="col-sm-auto order-sm-7" style="padding:0;margin:0;">
+        <nobr>
+          <button class="btn" onclick="showPPS('')" style="margin:0;padding:0;" type="button"><img src="../img/consult.png" title="Записаться на консультацию" width="30"/></button>
+          <button class="btn" onclick="showHelp()" style="margin:0;padding:0;" type="button"><img src="../img/help.png" title="Справка" width="30"/></button>
+          <button class="btn" onclick="showGlossary()" style="margin:0;padding:0;" type="button"><img src="../img/glossary.png" title="Глоссарий" width="30"/></button>
+        </nobr>
+      </div>
+      <!-- Кнопки вызова справки и записи на консультацию END -->
+
+    </div>
+    <!-- Поиск, меню END -->
+
+    <!-- Курс: содержание, содержимое BEGIN -->
+    <div class="row mb-sm-3">
+
+      <!-- Содержание BEGIN -->
+      <div class="col-sm-3 order-sm-1" id="tab_of_cont">
+        <div class="card border-info navbar sticky-top" id="id_contents" style="top: 75px; overflow: auto;">
+          <div class="card-body p-sm-1">
+            <ul class="nav nav-tabs" id="contentsTabs" role="tablist">
+              <li class="nav-item">
+                <a aria-controls="book-contents" aria-selected="true" class="nav-link active" data-toggle="tab" href="#book-contents" id="book-contents-tab" onclick="onTabChange()" role="tab">Содер-<br/>жание</a>
+              </li>
+              <li class="nav-item">
+                <a aria-controls="termins" aria-selected="false" class="nav-link" data-toggle="tab" href="#termins" id="termins-tab" onclick="onTabChange()" role="tab">Тематический<br/>указатель</a>
+              </li>
+              <li class="nav-item">
+                <a aria-controls="authors" aria-selected="false" class="nav-link" data-toggle="tab" href="#authors" id="authors-tab" onclick="onTabChange()" role="tab">Именной<br/>указатель</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="tabContent">
+              <div aria-labelledby="book-contents-tab" class="tab-pane fade show active" id="book-contents" role="tabpanel">
+                <div class="tree" id="jstree"></div>
+              </div>
+              <div aria-labelledby="termins-tab" class="tab-pane fade" id="termins" role="tabpanel">
+                <div class="tree" id="jstermtree"></div>
+              </div>
+              <div aria-labelledby="authors-tab" class="tab-pane fade" id="authors" role="tabpanel">
+                <div class="tree" id="jsauthortree"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Содержание END -->
+
+      <!-- Содержимое главы BEGIN -->
+      <div class="col-sm-9 order-sm-3" id="content">
+        <div class="card border-info" id="contentCard">
+          <div class="card-header" id="chapterTitle">Практика</div>
+          
+          <div class="card-body" id="cbody">
+            <div class="col-sm-12 order-sm-1" id="cardBody">
+              <div id='xbody'><span id="pagenum1"></span><h1 align="center">Практика</h1><p>Здесь перечисленые проекты, в которых продемонстрирован процесс реализации приобретенных знаний.</p><p>&nbsp;</p><ul><li><a href="">Распознавание объектов в реальном времени с видеопотока камеры</a></li><li><a href="">Распознавание радиостанций с фотографий или видео</a></li><li><a href="">Распознавание БПЛА в реальном времени</a></li><li><a href="">Анализатор спектра частот</a></li><li><a href="">Распознавание голоса, запись, перевод</a><br/></li><li><a href="">Распознавание объектов с тепловизионных камер</a><br/></li><li><a href="">Генетический алгоритм обучения нейронных сетей</a></li></ul><p>&nbsp;</p></div>
+            </div>
+          </div>
+          <div class="card-footer bg-transparent border-info" id="bookFooter">
+            <!-- Нижний колонтитул курса/книги -->
+            <p style="text-align:center;">&nbsp;</p>
+          </div>
+        </div>
+      </div>
+      <!-- Содержимое главы END -->
+    
+    </div>
+    <!-- Курс: содержание, содержимое END -->
+
+    <!-- Масштаб, навигационная панель BEGIN -->
+    <nav class="navbar fixed-bottom navbar-light bg-light" id="id_bottom_bar">
+      <span class="navbar-brand"></span>
+      <form class="form-inline">
+        <button class="btn btn-outline-primary" onclick="goPrevPage()" type="button">Предыдущая страница</button>
+        <input class="form-control" data-placement="top" id="page_box_id" min="1" onchange="onPageChange()" oninput="onPageChange()" style="width:6em;" title="Введите номер страницы, чтобы перейти на нее" type="number"/>
+        <button class="btn btn-outline-primary" onclick="goPageByNum()" type="button">На страницу</button>
+        <button class="btn btn-outline-primary" onclick="goNextPage()" type="button">Следующая страница</button>
+      </form>
+    </nav>
+    <!-- Масштаб, навигационная панель END -->
+  </div>
+
+  <!-- Скрипты BEGIN -->
+  <script>var selChapterId='00009889BF724D8E993C70D54753840E';
+    var PPSLINK = "";</script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/jstree/jstree.min.js"></script>
+  <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="../js/three/three.min.js"></script>
+  <script src="../js/three/chevrotain.min.js"></script>
+  <script src="../js/three/inflate.min.js"></script>
+  <script src="../js/three/ColladaLoader.js"></script>
+  <script src="../js/three/FBXLoader.js"></script>
+  <script src="../js/three/OBJLoader.js"></script>
+  <script src="../js/three/TDSLoader.js"></script>
+  <script src="../js/three/VRMLLoader.js"></script>
+  <script src="../js/three/OrbitControls.js"></script>
+  <script src="../js/three/TrackballControls.js"></script>
+  <script src="../js/tiff.js"></script>
+  <script src="../js/pdf/pdf.min.js"></script>
+  <script src="../js/djvu/djvu.js"></script>
+  <script src="../js/djvu/djvu_viewer.js"></script>
+  <script src="../js/jsibox.js"></script>
+  <script src="../js/shumway/shuobject.js"></script>
+  <script src="../js/constants.js"></script>
+  <script src="../js/service.js"></script>
+  <script src="../js/testres.service.js"></script>
+  <script src="../js/senddata.js"></script>
+  <script src="../js/tex-mml-chtml.js"></script>
+  <script src="../js/mark.min.js"></script>
+  <script src="../js/jquery.rwdImageMaps.min.js"></script>  
+  <script src="../js/circletype.min.js"></script>
+  <script src="../js/browser.js"></script>
+  <script src="../js/photo-sphere-viewer/photo-sphere-viewer.js"></script> 
+  <script>function gotoAddr(data)
+    {
+        if (data.event)
+        {
+          var href=data.instance.get_node(data.node).a_attr.href;
+          if (href=="") return;
+          if (allowTrans(nodeIdFromURL(href)))
+          {
+            if (userGeneral.lastTab==TAB_TERMINS)
+            {
+              // запомнить последний выделенный термин
+              var tree=$("#jstermtree").jstree();
+              var parent=tree.get_parent(data.node);
+              var parentNode=tree.get_node(parent);
+              userGeneral.lastItem=parentNode.text;
+            }
+            saveGeneralParams();
+            window.location=href;
+          }
+          else
+          {
+            // выделить текущий узел
+            $("#jstree").jstree().deselect_all(true);
+            $('#jstree').jstree('select_node',nodeIdFromURL(window.location.pathname));
+          }
+        }
+    }
+    function processSelChapter()
+    {
+      selectChapter(selChapterId);
+      let elem=document.getElementById(selChapterId);
+      if (elem) setNightModeElem(elem);
+    }
+    // инициализация книги
+    var InitData=
+    {
+      title: "Книга 2",
+      bookId: "0000065B1C2843C78AF80BF1184C4CDC",
+      chapters: [{"id":"0000065B1C314305B83FA523FFFB2F3F","parent":"#","text":"Титульный лист", "a_attr": {"href":"0000065B1C314305B83FA523FFFB2F3F.html","difficulty":"3","chapterType":"csAutoChapter"},type:"file"},{"id":"0000065B1C314857BD824FC5D7A550C9","parent":"#","text":"Оглавление", "a_attr": {"href":"0000065B1C314857BD824FC5D7A550C9.html","difficulty":"3","chapterType":"csAutoChapter"},type:"file"},{"id":"0000B8C553CD49ED85E2979AA3B9D184","parent":"#","text":"Введение: Значение искусственного интеллекта в современном мире", "a_attr": {"href":"0000B8C553CD49ED85E2979AA3B9D184.html","difficulty":"3","chapterType":"csChapter"},type:"folder"},{"id":"0000B8C553D84A7883E1C38378826329","parent":"0000B8C553CD49ED85E2979AA3B9D184","text":"1.1 Влияние технологий искусственного интеллекта на развитие автоматизированных систем специального назначения.", "a_attr": {"href":"0000B8C553D84A7883E1C38378826329.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000B8C553D841C691E75EA933E4FF34","parent":"0000B8C553CD49ED85E2979AA3B9D184","text":"1.2 Преимущества и вызовы применения искусственного интеллекта в автоматизированных системах", "a_attr": {"href":"0000B8C553D841C691E75EA933E4FF34.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000B8C553D8412FAB2041DDAACC3FC7","parent":"0000B8C553CD49ED85E2979AA3B9D184","text":"1.3 Этические вопросы и моральные аспекты использования искусственного интеллекта в военных системах", "a_attr": {"href":"0000B8C553D8412FAB2041DDAACC3FC7.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314A78B683B2A0B78256D8","parent":"#","text":"Глава 1. Основы технологий искусственного интеллекта", "a_attr": {"href":"0000065B1C314A78B683B2A0B78256D8.html","difficulty":"3","chapterType":"csAutoChapter"},type:"folder"},{"id":"0000065B1C314477BC8CFF6EF5404E68","parent":"0000065B1C314A78B683B2A0B78256D8","text":"1. Виды искусственного интеллекта", "a_attr": {"href":"0000065B1C314477BC8CFF6EF5404E68.html","difficulty":"3","chapterType":"csChapter"},type:"folder"},{"id":"0000065B1C314B89803C96D42E8307C9","parent":"0000065B1C314477BC8CFF6EF5404E68","text":"1.1 Общая структура искусственного интеллекта", "a_attr": {"href":"0000065B1C314B89803C96D42E8307C9.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314B849A909D723407F68B","parent":"0000065B1C314477BC8CFF6EF5404E68","text":"1.2 Слабый и сильный искусственный интеллект (Weak AI и Strong AI)", "a_attr": {"href":"0000065B1C314B849A909D723407F68B.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C31428A80409B92FFD87868","parent":"0000065B1C314477BC8CFF6EF5404E68","text":"1.3 Экспертные системы", "a_attr": {"href":"0000065B1C31428A80409B92FFD87868.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314310B6AFA55B4517A21D","parent":"0000065B1C314477BC8CFF6EF5404E68","text":"1.4 Эволюционные алгоритмы (моделирование)", "a_attr": {"href":"0000065B1C314310B6AFA55B4517A21D.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C3140A697D852F19EDA6344","parent":"0000065B1C314A78B683B2A0B78256D8","text":"2. Методы машинного обучения", "a_attr": {"href":"0000065B1C3140A697D852F19EDA6344.html","difficulty":"3","chapterType":"csChapter"},type:"folder"},{"id":"0000065B1C3142D6953DBDA82316D5B8","parent":"0000065B1C3140A697D852F19EDA6344","text":"2.1 Обучение с учителем", "a_attr": {"href":"0000065B1C3142D6953DBDA82316D5B8.html","difficulty":"3","chapterType":"csChapter"},type:"folder"},{"id":"0000065B1C314A6387A62A4106CDC31B","parent":"0000065B1C3142D6953DBDA82316D5B8","text":"2.1.1 Линейная регрессия", "a_attr": {"href":"0000065B1C314A6387A62A4106CDC31B.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314AEDB3294C78C2862B41","parent":"0000065B1C3142D6953DBDA82316D5B8","text":"2.1.2 Логистическая регрессия", "a_attr": {"href":"0000065B1C314AEDB3294C78C2862B41.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314B5E848C894A9715F52A","parent":"0000065B1C3142D6953DBDA82316D5B8","text":"2.1.3 Решающие деревья", "a_attr": {"href":"0000065B1C314B5E848C894A9715F52A.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314BA6ADA36B327A3BA6F9","parent":"0000065B1C3142D6953DBDA82316D5B8","text":"2.1.4 Случайный лес", "a_attr": {"href":"0000065B1C314BA6ADA36B327A3BA6F9.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314B078BC40E1FC656FFD5","parent":"0000065B1C3142D6953DBDA82316D5B8","text":"2.1.5 K-ближайших соседей (KNN)", "a_attr": {"href":"0000065B1C314B078BC40E1FC656FFD5.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314506B2DA1E7B39D76A37","parent":"0000065B1C3142D6953DBDA82316D5B8","text":"2.1.6 Метод опорных векторов (SVM)", "a_attr": {"href":"0000065B1C314506B2DA1E7B39D76A37.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C3144CB8774B6F6F6638BD3","parent":"0000065B1C3142D6953DBDA82316D5B8","text":"2.1.7 Наивный Байес", "a_attr": {"href":"0000065B1C3144CB8774B6F6F6638BD3.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314AEA86233AFA68C6416B","parent":"0000065B1C3140A697D852F19EDA6344","text":"2.2 Обучение без учителя", "a_attr": {"href":"0000065B1C314AEA86233AFA68C6416B.html","difficulty":"3","chapterType":"csChapter"},type:"folder"},{"id":"0000065B1C314A0EA0480631DDB4DAEB","parent":"0000065B1C314AEA86233AFA68C6416B","text":"2.2.1 Кластеризация (K-средних, DBSCAN)", "a_attr": {"href":"0000065B1C314A0EA0480631DDB4DAEB.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C3147E0B1F275291562937A","parent":"0000065B1C314AEA86233AFA68C6416B","text":"2.2.2 Метод главных компонент (PCA)", "a_attr": {"href":"0000065B1C3147E0B1F275291562937A.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C3146D48EDE335E6663805B","parent":"0000065B1C314AEA86233AFA68C6416B","text":"2.2.3 Ассоциативные правила", "a_attr": {"href":"0000065B1C3146D48EDE335E6663805B.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C31435E9B64D8DECC7AA7DB","parent":"0000065B1C3140A697D852F19EDA6344","text":"2.3 Обучение с подкреплением", "a_attr": {"href":"0000065B1C31435E9B64D8DECC7AA7DB.html","difficulty":"3","chapterType":"csChapter"},type:"folder"},{"id":"0000065B1C314113BA2A360853BE8283","parent":"0000065B1C31435E9B64D8DECC7AA7DB","text":"2.3.1 Q-обучение", "a_attr": {"href":"0000065B1C314113BA2A360853BE8283.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314318BD2745893B857E20","parent":"0000065B1C31435E9B64D8DECC7AA7DB","text":"2.3.2 Марковские процессы принятия решений (MDP)", "a_attr": {"href":"0000065B1C314318BD2745893B857E20.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C3145B6A3C82229E84BB205","parent":"0000065B1C31435E9B64D8DECC7AA7DB","text":"2.3.3 Глубокое обучение (Deep Q-Network, Reinforce)", "a_attr": {"href":"0000065B1C3145B6A3C82229E84BB205.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C3143F2A73949F0FBE07EA0","parent":"0000065B1C3140A697D852F19EDA6344","text":"2.4 Усиленное обучение", "a_attr": {"href":"0000065B1C3143F2A73949F0FBE07EA0.html","difficulty":"3","chapterType":"csChapter"},type:"folder"},{"id":"0000065B1C314261935015709F81E4CD","parent":"0000065B1C3143F2A73949F0FBE07EA0","text":"2.4.1 Преобразование признаков", "a_attr": {"href":"0000065B1C314261935015709F81E4CD.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314E0BA019A2517025E4CD","parent":"0000065B1C3143F2A73949F0FBE07EA0","text":"2.4.2 Регуляризация", "a_attr": {"href":"0000065B1C314E0BA019A2517025E4CD.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C31416BBF78878AAD4B2A30","parent":"0000065B1C3143F2A73949F0FBE07EA0","text":"2.4.3 Отбор признаков", "a_attr": {"href":"0000065B1C31416BBF78878AAD4B2A30.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314AC88FB55DB429D16849","parent":"0000065B1C3143F2A73949F0FBE07EA0","text":"2.4.4 Нормализация данных", "a_attr": {"href":"0000065B1C314AC88FB55DB429D16849.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C31477E965607545285EBF3","parent":"0000065B1C314A78B683B2A0B78256D8","text":"3. Основы нейронных сетей", "a_attr": {"href":"0000065B1C31477E965607545285EBF3.html","difficulty":"3","chapterType":"csChapter"},type:"folder"},{"id":"0000065B1C314ADFAA1B82CBC069DA80","parent":"0000065B1C31477E965607545285EBF3","text":"3.1. Нейронные сети и их принципы работы", "a_attr": {"href":"0000065B1C314ADFAA1B82CBC069DA80.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314304A4F309F3DAABEFE3","parent":"0000065B1C31477E965607545285EBF3","text":"3.2 Различные архитектуры нейронных сетей", "a_attr": {"href":"0000065B1C314304A4F309F3DAABEFE3.html","difficulty":"3","chapterType":"csChapter"},type:"folder"},{"id":"0000065B1C31409BA48DCC3D0E7EED29","parent":"0000065B1C314304A4F309F3DAABEFE3","text":"3.2.1 Перцептрон", "a_attr": {"href":"0000065B1C31409BA48DCC3D0E7EED29.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314F7D92A232A1E0994847","parent":"0000065B1C314304A4F309F3DAABEFE3","text":"3.2.2 Сверточные нейронные сети", "a_attr": {"href":"0000065B1C314F7D92A232A1E0994847.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314700A8BE3F46167D71B4","parent":"0000065B1C314304A4F309F3DAABEFE3","text":"3.2.3 Рекуррентные нейронные сети", "a_attr": {"href":"0000065B1C314700A8BE3F46167D71B4.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C3142E5B34DF575A758DF30","parent":"0000065B1C31477E965607545285EBF3","text":"3.3 Обучение нейронных сетей", "a_attr": {"href":"0000065B1C3142E5B34DF575A758DF30.html","difficulty":"3","chapterType":"csChapter"},type:"folder"},{"id":"0000065B1C314601BB02333A28925DDA","parent":"0000065B1C3142E5B34DF575A758DF30","text":"3.3.1 Обратное распространение ошибки", "a_attr": {"href":"0000065B1C314601BB02333A28925DDA.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314B218388C3B21B8D2851","parent":"0000065B1C3142E5B34DF575A758DF30","text":"3.3.2 Градиентный спуск", "a_attr": {"href":"0000065B1C314B218388C3B21B8D2851.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C3140DBA0C4D0CB95F5D5B8","parent":"#","text":"Глава 2. Применение искусственного интеллекта в автоматизированных системах специального назначения", "a_attr": {"href":"0000065B1C3140DBA0C4D0CB95F5D5B8.html","difficulty":"3","chapterType":"csAutoChapter"},type:"folder"},{"id":"0000065B1C31427CB47ACA5633138EB4","parent":"0000065B1C3140DBA0C4D0CB95F5D5B8","text":"1. Компьютерное зрение", "a_attr": {"href":"0000065B1C31427CB47ACA5633138EB4.html","difficulty":"3","chapterType":"csChapter"},type:"folder"},{"id":"0000065B1C31454AA6DB9B9B6F795770","parent":"0000065B1C31427CB47ACA5633138EB4","text":"1.1 Определение компьютерного зрения", "a_attr": {"href":"0000065B1C31454AA6DB9B9B6F795770.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314B5DBE4964938A3866A7","parent":"0000065B1C31427CB47ACA5633138EB4","text":"1.2 Распознавание лиц и биометрическая аутентификация", "a_attr": {"href":"0000065B1C314B5DBE4964938A3866A7.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C31448D94FD9D667A5EA8BC","parent":"0000065B1C31427CB47ACA5633138EB4","text":"1.3 Навигация и обнаружение объектов в автоматизированных системах", "a_attr": {"href":"0000065B1C31448D94FD9D667A5EA8BC.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314576A01A328D0F14C178","parent":"0000065B1C31427CB47ACA5633138EB4","text":"1.4 Робототехника и автоматизация производственных процессов", "a_attr": {"href":"0000065B1C314576A01A328D0F14C178.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C3147C49BC20E6B7B3731E7","parent":"0000065B1C3140DBA0C4D0CB95F5D5B8","text":"2. Анализ данных", "a_attr": {"href":"0000065B1C3147C49BC20E6B7B3731E7.html","difficulty":"3","chapterType":"csChapter"},type:"folder"},{"id":"0000065B1C3144ECAE0E4D8337F1EBC7","parent":"0000065B1C3147C49BC20E6B7B3731E7","text":"2.1 Роль и значение анализа данных в автоматизированных системах специального назначения", "a_attr": {"href":"0000065B1C3144ECAE0E4D8337F1EBC7.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C3149E69E4033B0BBFB7C69","parent":"0000065B1C3147C49BC20E6B7B3731E7","text":"2.2 Сбор данных", "a_attr": {"href":"0000065B1C3149E69E4033B0BBFB7C69.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C31472E95847DE2FC3DC236","parent":"0000065B1C3147C49BC20E6B7B3731E7","text":"2.3 Обработка данных", "a_attr": {"href":"0000065B1C31472E95847DE2FC3DC236.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C3148D8A6181B4B8D1AE81B","parent":"0000065B1C3147C49BC20E6B7B3731E7","text":"2.4 Интерпретация данных", "a_attr": {"href":"0000065B1C3148D8A6181B4B8D1AE81B.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C3142369235375EE4703BEE","parent":"0000065B1C3147C49BC20E6B7B3731E7","text":"2.5 Принятие решений", "a_attr": {"href":"0000065B1C3142369235375EE4703BEE.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314AE0A54A430B7DDCE1A2","parent":"0000065B1C3147C49BC20E6B7B3731E7","text":"2.6 Визуализация данных", "a_attr": {"href":"0000065B1C314AE0A54A430B7DDCE1A2.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C314A9086E8AE07EF873EB8","parent":"0000065B1C3140DBA0C4D0CB95F5D5B8","text":"3. Робототехника", "a_attr": {"href":"0000065B1C314A9086E8AE07EF873EB8.html","difficulty":"3","chapterType":"csChapter"},type:"folder"},{"id":"0000065B1C314FD585B92E573EDBBD7C","parent":"0000065B1C314A9086E8AE07EF873EB8","text":"3.1 Беспилотные летательные аппараты (БПЛА)", "a_attr": {"href":"0000065B1C314FD585B92E573EDBBD7C.html","difficulty":"3","chapterType":"csChapter"},type:"folder"},{"id":"0000A3B87D2648E59098F4AECBA62FD8","parent":"0000065B1C314FD585B92E573EDBBD7C","text":"3.1.1 Классификация и характеристика БПЛА", "a_attr": {"href":"0000A3B87D2648E59098F4AECBA62FD8.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000A3F480734A3C9594C62D494F92C7","parent":"0000065B1C314FD585B92E573EDBBD7C","text":"3.1.2 Применение технологий ИИ в БПЛА (при выполнении задач разведки, поражения ВВиСТ и живой силы противника, спасательных операций и др.)", "a_attr": {"href":"0000A3F480734A3C9594C62D494F92C7.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C3148C089CB3C1926C2FCE1","parent":"0000065B1C314A9086E8AE07EF873EB8","text":"3.2 Безэкипажные надводные и подводные средства (БНПС)", "a_attr": {"href":"0000065B1C3148C089CB3C1926C2FCE1.html","difficulty":"3","chapterType":"csChapter"},type:"folder"},{"id":"0000A4F1B1184E1191AFC9E6D46D1CF6","parent":"0000065B1C3148C089CB3C1926C2FCE1","text":"3.2.1 Классификация и характеристика БНПС", "a_attr": {"href":"0000A4F1B1184E1191AFC9E6D46D1CF6.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000A54219D2408EB199F6E5018B4B48","parent":"0000065B1C3148C089CB3C1926C2FCE1","text":"3.2.2 Применение технологий ИИ в БНПС (при выполнении задач разведки, поражения ВВиСТ и живой силы противника, спасательных операций и др.)", "a_attr": {"href":"0000A54219D2408EB199F6E5018B4B48.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C3142D497672062E541C254","parent":"0000065B1C314A9086E8AE07EF873EB8","text":"3.3 Наземные робототехнические комплексы (НРК)", "a_attr": {"href":"0000065B1C3142D497672062E541C254.html","difficulty":"3","chapterType":"csChapter"},type:"folder"},{"id":"0000A5A7BAA34B88A8A99C6F4078958A","parent":"0000065B1C3142D497672062E541C254","text":"3.3.1 Классификация и характеристика НРК", "a_attr": {"href":"0000A5A7BAA34B88A8A99C6F4078958A.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000A5A9C1C44A70AB2F5158BE677F56","parent":"0000065B1C3142D497672062E541C254","text":"3.3.2 Применение технологий ИИ в НРК (при выполнении задач разведки, поражения ВВиСТ и живой силы противника, спасательных операций и др.)", "a_attr": {"href":"0000A5A9C1C44A70AB2F5158BE677F56.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C3144EF8577C940A8F12A4C","parent":"0000065B1C3140DBA0C4D0CB95F5D5B8","text":"4. Системы безопасности", "a_attr": {"href":"0000065B1C3144EF8577C940A8F12A4C.html","difficulty":"3","chapterType":"csChapter"},type:"folder"},{"id":"0000BC9697074BE1B189C9CAFCCFF773","parent":"0000065B1C3144EF8577C940A8F12A4C","text":"4.1 Проблемы безопасности при использовании искусственного интеллекта", "a_attr": {"href":"0000BC9697074BE1B189C9CAFCCFF773.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000BCC04FDA4C9B8A5CECEEE922B95D","parent":"0000065B1C3144EF8577C940A8F12A4C","text":"4.2 Применение искусственного интеллекта в системах защиты информации", "a_attr": {"href":"0000BCC04FDA4C9B8A5CECEEE922B95D.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C32402DB0289CA1F1764E9B","parent":"0000065B1C3144EF8577C940A8F12A4C","text":"4.3 Применение искусственного интеллекта в системах разведки и мониторинга", "a_attr": {"href":"0000065B1C32402DB0289CA1F1764E9B.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C3245419780B98171862A82","parent":"0000065B1C3144EF8577C940A8F12A4C","text":"4.4 Интеллектуальные системы видеонаблюдения", "a_attr": {"href":"0000065B1C3245419780B98171862A82.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"00009889BF724D8E993C70D54753840E","parent":"#","text":"Практика", "a_attr": {"href":"00009889BF724D8E993C70D54753840E.html","difficulty":"3","chapterType":"csChapter"},type:"file"},{"id":"0000065B1C324BF9B593A9D85DE574D4","parent":"#","text":"Литература", "a_attr": {"href":"0000065B1C324BF9B593A9D85DE574D4.html","difficulty":"3","chapterType":"csLink"},type:"file"}],
+      author: "",
+      minTime: "0",
+      allowChapters: "" 
+    };
+    initBook(InitData);
+    var testList = {"0000A6A1E0CA44FAB8D18AE8C595BA3B":{"passw":"", "passw_repeat":"", "title":"Тест_1_1_1", "phaze":"motivation", "rand_questions":"true", "questions":[{"id":"0000A6A1E0D447DBACA7505D5F248A3D","level":"3","order":"0","score":"0,00","themeId":"0000A2EF2BDB4F08B274319F78F8E90A","theme":"Виды искусственного интеллекта","q_text":"Что включает в себя понятие «сквозные цифровые технологии»?  ","comment":"","timeLimit":"0"},
+{"id":"0000A6A1E0DB4994A6B12972578BBA6D","level":"3","order":"1","score":"0,00","themeId":"0000A2EF2BDB4F08B274319F78F8E90A","theme":"Виды искусственного интеллекта","q_text":"Какую роль играют компьютеры в области прогресса производительности и эффективности применения оружия?  ","comment":"","timeLimit":"0"},
+{"id":"0000A6A1E0DD444FA9D2708D245B67E9","level":"3","order":"2","score":"0,00","themeId":"0000A2EF2BDB4F08B274319F78F8E90A","theme":"Виды искусственного интеллекта","q_text":"Что такое «искусственный интеллект», в контексте текста?  ","comment":"","timeLimit":"0"},
+{"id":"0000A6A1E0E14979ACD4AD3E59A7D8DB","level":"3","order":"3","score":"0,00","themeId":"0000A2EF2BDB4F08B274319F78F8E90A","theme":"Виды искусственного интеллекта","q_text":"Какие технологии входят в категорию «сквозных цифровых технологий»?  ","comment":"","timeLimit":"0"},
+{"id":"0000A6A1E0E34ECA81F9B1D6F722E367","level":"3","order":"4","score":"0,00","themeId":"0000A2EF2BDB4F08B274319F78F8E90A","theme":"Виды искусственного интеллекта","q_text":"Что является основным элементом, позволяющим компьютерам принимать на себя часть интеллектуальной нагрузки промышленности и управления боем?  ","comment":"","timeLimit":"0"},
+{"id":"0000A6A1E0E64D9C81019F129D7E852D","level":"3","order":"5","score":"0,00","themeId":"0000A2EF2BDB4F08B274319F78F8E90A","theme":"Виды искусственного интеллекта","q_text":"Какое понятие было введено Джоном Серлом в 1980 году?  ","comment":"","timeLimit":"0"},
+{"id":"0000A6A1E0EB4EC5B84A3C9C6D5D7B40","level":"3","order":"6","score":"0,00","themeId":"0000A2EF2BDB4F08B274319F78F8E90A","theme":"Виды искусственного интеллекта","q_text":"Что определяет сильный искусственный интеллект в терминах Джона Серла?  ","comment":"","timeLimit":"0"},
+{"id":"0000A6A1E0EE4692BF271259D6EE0FDE","level":"3","order":"7","score":"0,00","themeId":"0000A2EF2BDB4F08B274319F78F8E90A","theme":"Виды искусственного интеллекта","q_text":"Что позволило значительно повысить эффективность применения вооружения и техники?  ","comment":"","timeLimit":"0"},
+{"id":"0000A6A1E0EF49899E5AC912E9FC6269","level":"3","order":"8","score":"0,00","themeId":"0000A2EF2BDB4F08B274319F78F8E90A","theme":"Виды искусственного интеллекта","q_text":"Какие из перечисленных являются основными свойствами искусственного интеллекта?  ","comment":"","timeLimit":"0"},
+{"id":"0000A6A1E0F1443EB51966FBFA87C04D","level":"3","order":"9","score":"0,00","themeId":"0000A2EF2BDB4F08B274319F78F8E90A","theme":"Виды искусственного интеллекта","q_text":"Какое из следующих не является фактором развития искусственного интеллекта?  ","comment":"","timeLimit":"0"},
+{"id":"0000A6A1E0F547F3B3DC5F1652568E4C","level":"3","order":"10","score":"0,00","themeId":"0000A2EF2BDB4F08B274319F78F8E90A","theme":"Виды искусственного интеллекта","q_text":"Какие основные факторы говорят об искусственном интеллекте как о глобальном тренде?  ","comment":"","timeLimit":"0"},
+{"id":"0000A6A1E0F846F6B3F9606DCC2FCBE3","level":"3","order":"11","score":"0,00","themeId":"0000A2EF2BDB4F08B274319F78F8E90A","theme":"Виды искусственного интеллекта","q_text":"Какие из перечисленных направлений исследований в области искусственного интеллекта связаны с автоматизацией различных видов деятельности человека?  ","comment":"","timeLimit":"0"},
+{"id":"0000A6A1E0FB45B895F78337C98AEC96","level":"3","order":"12","score":"0,00","themeId":"0000A2EF2BDB4F08B274319F78F8E90A","theme":"Виды искусственного интеллекта","q_text":"Какие из перечисленных являются направлениями в искусственном интеллекте, выделяемыми по разрабатываемой модели мышления?  ","comment":"","timeLimit":"0"},
+{"id":"0000A6A1E0FD43C88170826285CE2788","level":"3","order":"13","score":"0,00","themeId":"0000A2EF2BDB4F08B274319F78F8E90A","theme":"Виды искусственного интеллекта","q_text":"Какая философская парадигма была связана с началом исследований в области искусственного интеллекта?  ","comment":"","timeLimit":"0"},
+{"id":"0000A6A1E0FF4901A631EDC8241AA090","level":"3","order":"14","score":"0,00","themeId":"0000A2EF2BDB4F08B274319F78F8E90A","theme":"Виды искусственного интеллекта","q_text":"Какие из перечисленных методов претендуют на то, чтобы быть названными отдельным подходом к искусственному интеллекту?  ","comment":"","timeLimit":"0"}], "finThemeList":[],"questionQuantity":0, "theme":"Виды искусственного интеллекта", "tryLimit":0, "destination":"tdAttestaion"}};
+    initTestList(testList);
+    // удаление исходных вопросов
+    localStorage_removeItem(questionSourceList);
+    // области изображений
+    $(document).ready(function(e) {
+      $('img[usemap]').rwdImageMaps();
+    });
+    $("#scale_box_id").on('change', function(e) {
+      $('img[usemap]').rwdImageMaps();
+    });
+    // оглавление
+    $('#jstree').jstree({
+      "plugins": ["types","search"],
+      "search":{"case_sensitive":false,"show_only_matches":false},
+      "types":
+      {
+        "folder": {"icon": "jstree-icon jstree-folder"},
+        "file": {"icon": "jstree-icon jstree-file"}
+      },
+      "core" :
+      {
+        "check_callback": true,
+        "themes":
+        {
+          "dots" :false,"responsive" :true,"stripes":false,"icons":true
+        },
+        "data" : InitData.chapters
+      } 
+    });
+    $('#jstree').on('changed.jstree', function (e, data)
+    {
+      gotoAddr(data);
+    });
+    $('#jstree').on('loaded.jstree', function()
+    {
+      processSelChapter();
+    });
+    $('#jstree').on('open_node.jstree', function (e, data)
+    {
+      restoreTreeState();
+    });
+    // термины
+    $('#jstermtree').jstree({
+      "plugins": ["types","search"],
+      "search":{"case_sensitive":false,"show_only_matches":false},
+      "types":
+      {
+        "folder": {"icon": "jstree-icon jstree-folder"},
+        "file": {"icon": "jstree-icon jstree-file"}
+      },
+      "core" :
+      {
+        "themes":
+        {
+          "dots" :false,"responsive" :true,"stripes":false,"icons":true
+        },
+        "data" : []
+      } 
+    });
+    $('#jstermtree').on('changed.jstree', function (e, data)
+    {
+      gotoAddr(data);
+    });
+    // именной указатель
+    $('#jsauthortree').jstree({
+      "plugins": ["types","search"],
+      "search":{"case_sensitive":false,"show_only_matches":false},
+      "types":
+      {
+        "folder": {"icon": "jstree-icon jstree-folder"},
+        "file": {"icon": "jstree-icon jstree-file"}
+      },
+      "core" :
+      {
+        "themes":
+        {
+          "dots" :false,"responsive" :true,"stripes":false,"icons":true
+        },
+        "data" : []
+      } 
+    });
+    $('#jsauthortree').on('changed.jstree', function (e, data)
+    {
+      if (data.event)
+      {
+        var elem=document.getElementById("cardBody");
+        if (elem)
+        {
+          var nodeData=data.instance.get_node(data.selected[0]);
+          var html="Публикации "+nodeData.text+"<br><br>";
+          if (nodeData.a_attr.publication!="")
+            html=html+nodeData.a_attr.publication;
+          else
+            html=html+"Публикации отсутствуют";
+          elem.innerHTML=html;
+          curChapterId="authors";
+        }
+      }
+    });
+    // поиск
+    $("#jstree").bind('ready.jstree', function(event, data) 
+    {
+        $($("#jstree").jstree().get_json($("#jstree"), 
+        {
+            flat: true
+        }))
+        .each(function(index, value) 
+        {
+            var node = $("#jstree").jstree().get_node(this.id);
+            processTreeNode(node);
+        });
+        changeDifficulty(book.curDifficulty);
+        restoreTreeState();
+        processSelChapter();
+    });	
+    $('#search_box').keyup(function (e)
+    {
+      let v = $('#search_box').val();
+      globalSearch(v);
+      if(e.keyCode === 13) {
+        searhOnEnter(v);
+      }
+    });
+
+    // Растягивание рамки содержания и панели содержимого главы по высоте окна браузера
+    function alignContentsHeight() {
+      // Контейнер с закладками "Содержание, Тематический указатель, Именной указатель"
+      let contentsItem = document.getElementById("id_contents");
+      // Контейнер содержимого главы
+      let contentCardItem = document.getElementById("contentCard");
+      // Нижняя навигационная панель с кнопками
+      let bottomBarItem = document.getElementById("id_bottom_bar");
+      // Вкладки (заголовки) "Содержание, Тематический указатель, Именной указатель"
+      let tabs = document.getElementById("contentsTabs");
+      // Контейнер для дерева Содержания
+      let jstree = document.getElementById("jstree");
+      // Контейнер для дерева Тематического указателя
+      let jstermtree = document.getElementById("jstermtree");
+      // Контейнер для дерева Именного указателя
+      let jsauthortree = document.getElementById("jsauthortree");
+      if (contentsItem && contentCardItem && bottomBarItem && tabs && jstree && jstermtree && jsauthortree) {
+        let r1 = contentsItem.getBoundingClientRect();
+        let r2 = bottomBarItem.getBoundingClientRect();
+        let offset = 32; // Размер рамок и полей
+        let height = r2.top - r1.top - offset;
+        let h = height.toFixed() + 'px';
+        contentsItem.style.minHeight = h;
+        contentCardItem.style.minHeight = h;
+        let minHeight = 100; // Минимальная высота дерева содержания, чтобы полностью не схлопывалось
+        height = Math.max(height - tabs.offsetHeight - offset, minHeight);
+        h = height.toFixed() + 'px';
+        jstree.style.maxHeight = h;
+        jstermtree.style.maxHeight = h;
+        jsauthortree.style.maxHeight = h;
+      }
+    }
+
+    // Обработчик события прокрутки окна
+    function onscroll_handler() {
+      alignContentsHeight();
+    }
+
+    // Обработчик изменения размера окна
+    function onresize_handler() {
+      alignContentsHeight();
+      // Растягивание изображения для фона пропорционально его размеру (если фон добавлен через меню "Глава/Фон/Установить растянутый фон")
+      let item = document.getElementById("xbody");
+      if (!item || !item.hasAttribute('image-width')) {
+        return;
+      }
+      let imageWidth = parseInt(item.getAttribute('image-width'));
+      let imageHeight = parseInt(item.getAttribute('image-height'));
+      let width = item.clientWidth;
+      width = width * imageHeight / imageWidth;
+      item.style.minHeight = width.toFixed() + 'px';
+    }
+    window.addEventListener("resize", onresize_handler, false);
+    window.addEventListener("scroll", onscroll_handler, false);
+    onresize_handler();
+
+    // Включение обработки перехода по ссылкам на последующие главы курса в случае,
+    // если установлена опция "Последовательный переход между главами" в свойствах книги.
+    enableAllowTransUrls();
+    // Включение контекстного меню для содержания книги
+    enableContextMenu();</script>
+  <!-- Скрипты END -->
+
+</body>
+</html>
