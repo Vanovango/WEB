@@ -1,13 +1,12 @@
 {% extends 'main/layout.html' %}
 
-{% block title %}
-    Хуй
-{% endblock %}
+{% block title %}Главная страница{% endblock %}
 
 {% block content %}
-    <h1>Хуй</h1>
-    <p>Хуй поменьше</p>
-
-    {% include 'main/test.html' %}
+    <div class="features">
+        <h1>Технопарк</h1>
+        <p>Технопарк - это люди! Это главный слоган нашего коллектива.</p>
+        <button class="btn btn-warning"> На страницу про нас </button>
+    </div>
 {% endblock %}
 
