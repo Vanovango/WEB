@@ -38,12 +38,12 @@ aside ul {
 aside ul li {
     color: #fff;
     display: block;
-    margine-top: 20px;
+    margin-top: 15px;
     font-size: 18px;
     transition: transform .6s ease;
 }
 
-aside ul li:hover, aside ul a:hover {
+aside ul li:hover {
     color: #eb5959;
     text-decoration: none;
     transform: scale(1.05);
@@ -59,3 +59,11 @@ main .features {
 
 main .features h1 {font-size: 50px;}
 main .features p {max-width: 400px; margin: 20px auto;}
+
+.alert-warning {
+    float: left;
+    clear: both;
+    width: 400px;
+    margin: 20px 34%;
+    test-align: left;
+}
