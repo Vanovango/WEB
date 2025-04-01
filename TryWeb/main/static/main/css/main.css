@@ -19,7 +19,7 @@ aside img {
 
 aside .logo {
     font-size:  40px;
-    margine-left: 10px;
+    margin-left: 10px;
     font-weight: bold;
     position: relative;
     top: -5px;
@@ -52,12 +52,12 @@ aside ul li:hover {
 main .features {
     float: left;
     color: #fff;
-    margine-top: 100px;
+    margin-top: 100px;
     text-align: center;
     width: 75%;
 }
 
-main .features h1 {font-size: 50px;}
+main .features h1 {font-size: 50px; text-align: center;}
 main .features p {max-width: 400px; margin: 20px auto;}
 
 .alert-warning {
@@ -68,8 +68,8 @@ main .features p {max-width: 400px; margin: 20px auto;}
     test-align: left;
 }
 
-.from {
-    margin-left: 32%;
-    width: 500px;
-    margin-top: 50px;
+form.add-form {
+    margin-left: 20%;
+    width: 700px;
+    margin-top: 30px;
 }

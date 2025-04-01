@@ -1,11 +1,11 @@
 {% extends 'main/layout.html' %}
 
-{% block title %}Добавить статью{% endblock %}
+{% block title %}Добавить новость{% endblock %}
 
 {% block content %}
     <div class="features">
         <h1>Добавить новость</h1>
-        <form method="post">
+        <form class="add-form" action="" method="post">
             {% csrf_token %}<br>
             {{ form.title }}<br>
             {{ form.anons }}<br>
